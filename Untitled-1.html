@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>   
+  <meta charset="UTF-8">
+  <title>تهنئة</title>
+  <meta name="google-site-verification" content="LJFlOvVfWebNkg9EqYSuw3XZmLWCorH0yEMfJ_beN5A" />
+  <style>
+    body {
+      text-align: center;
+      background-color: #fef6f9;
+      font-family: 'Arial', sans-serif; 
+      padding-top: 100px;
+    }
+    h1 { 
+      color: #d6336c;
+      font-size: 36px;
+      margin-top: 20px;
+      display: none;
+    }
+    .heart {
+      font-size: 50px;
+      color: red;
+      display: none;    
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;     
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;    
+    }
+  </style>
+</head>
+<body> 
+
+  <button onclick="startCelebration()">اضغط هنا</button> 
+
+  <h1 id="greeting">كل عام وانتِ بخير منى</h1>
+  <div class="heart" id="heart">❤️</div>
+
+  <canvas id="confetti"></canvas>
+  <audio id="song" src="Amr.mp3"></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    function startCelebration() {
+      document.getElementById('greeting').style.display = 'block';
+      document.getElementById('heart').style.display = 'block';   
+
+      const song = document.getElementById('song');
+      song.play();
+
+      const duration = 5 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 7,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+        });
+        confetti({
+          particleCount: 7,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+        });
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+  </script>
+</body>
+</html>
